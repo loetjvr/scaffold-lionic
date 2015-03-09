@@ -1,0 +1,6 @@
+{
+  "generator-lionic": {
+    "scriptsDir": "www/js/",
+    "viewsDir": "www/templates/"
+  }
+}
