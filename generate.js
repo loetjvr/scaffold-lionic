@@ -31,7 +31,6 @@ gulp.task('templates', function() {
     'test/karma.conf.js',
     'test/spec/controllers/main.js',
     'hooks/**/*',
-    'plugins/**/*',
     'scss/**/*'
   ], {base: '.'})
   .pipe($.rename(function(file) {
