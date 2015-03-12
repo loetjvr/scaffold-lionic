@@ -28,6 +28,7 @@ gulp.task('templates', function() {
     'www/templates/main.html',
     'www/templates/nav.html',
     'www/index.html',
+    'www/lib/vendor.js',
     'test/karma.conf.js',
     'test/spec/controllers/main.js',
     'hooks/**/*',
@@ -40,6 +41,7 @@ gulp.task('templates', function() {
   }))
   .pipe($.if('*.js', $.replace(/scaffoldLionic/g, '<%= appname %>')))
   .pipe($.if('*.html', $.replace(/scaffoldLionic/g, '<%= appname %>')))
+  .pipe($.if('*.json', $.replace(/scaffoldLionic/g, '<%= appname %>')))
   .pipe(gulp.dest('gen/templates/app'));
 });
 
@@ -47,7 +49,7 @@ gulp.task('scripts', ['templates'], function() {
   var appDir = path.join(process.cwd(), 'gen/templates/app/');
 
   return gulp.src(appDir + 'index.html')
-    .pipe($.inject(gulp.src(appDir + 'scripts/**/*.js'), {
+    .pipe($.inject(gulp.src(appDir + 'js/**/*.js'), {
       starttag: '<!-- build:js({.tmp,app}) scripts/scripts.js -->',
       endtag: '<!-- endbuild -->',
       relative: true
