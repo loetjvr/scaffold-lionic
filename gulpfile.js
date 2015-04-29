@@ -13,7 +13,7 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('useref', function() {
+gulp.task('useref', ['wiredep'], function() {
   var assets = $.useref.assets();
 
   gulp.src('wire.dep')
@@ -24,7 +24,7 @@ gulp.task('useref', function() {
     .pipe(gulp.dest('www'));
 });
 
-gulp.task('wiredep', ['useref', 'fonts'], function() {
+gulp.task('wiredep', function() {
   var wiredep = require('wiredep').stream;
 
   gulp.src('wire.dep')
@@ -60,7 +60,7 @@ gulp.task('clean', require('del').bind(null, ['docs']));
 
 gulp.task('watch', function() {
   gulp.watch('scss/**/*.scss', ['sass']);
-  gulp.watch('bower.json', ['wiredep']);
+  gulp.watch('bower.json', ['useref']);
   gulp.watch('www/js/**/*.js', ['jshint', 'jscs']);
 });
 
